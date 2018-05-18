@@ -40,4 +40,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
 Website2014/
+package-lock.json
