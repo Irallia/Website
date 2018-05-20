@@ -3,5 +3,5 @@ export class BlogEntry {
     name: string;
     text: string;
     author: string;
-    imagePath: string;
+    imagePaths: string[];
   }

@@ -1,16 +1,16 @@
 <h1>Hier entsteht der Blog von Stefan und Lydia ...</h1>
 
-<div class="container color-dark">
+<div class="master" class="container color-dark">
   <div class="col">
       <p>Blogeinträge ({{itemCount}})</p>
   </div>
-  <div class="col">
+  <div class="detail" class="col">
     <p>Blogeintrag</p>
   </div>
 </div>
 
 <div class="container color-light" [@blogEntries]="blogEntries.length">
-  <div class="col">
+  <div class="master" class="col">
     <p class="life-container" *ngFor="let blogEntry of blogEntries" (click)="onSelect(blogEntry)">
       {{blogEntry.name}}
     </p>
@@ -18,17 +18,14 @@
   <!-- <select [(ngModel)]="selectedValue">
     <option *ngFor="let blogEntry of blogEntries" [ngValue]="blogEntry">{{blogEntry.name}}</option>
   </select> -->
-  <div *ngIf="selectedBlogEntry" class="col">
+  <div class="detail" *ngIf="selectedBlogEntry" class="col">
     <h2>{{ selectedBlogEntry.name | uppercase }}</h2>
     <div>{{selectedBlogEntry.text}}</div>
     <div style="text-align: right; color: red;">
-      <p>{{selectedBlogEntry.autor}}</p>
+      <p>{{selectedBlogEntry.author}}</p>
     </div>
-    <!-- <img ng-src="{{selectedBlogEntry.imagePath}}" class="grid-img" /> -->
-    <!-- <img *ngIf!="{{selectedBlogEntry.imagePath}}!='' " width="100" height="100" src="{{selectedBlogEntry.imagePath}}"> -->
-    <img *ngIf="selectedBlogEntry" width="50%" height="50%" [src]="selectedBlogEntry.imagePath">
-    <img src="assets/images/photo_2015-12-12.jpg">
-    
-    <!-- <img width="100" height="100" src="{{selectedBlogEntry.imageSrc}}"> -->
+    <img width="50%" height="50%" 
+        *ngFor="let path of selectedBlogEntry.imagePaths" 
+        [src]="path">
   </div>
 </div>
