@@ -10,7 +10,7 @@ import { DataService } from '../data.service';
       This is what I'm all about. <a href="" (click)="sendMeHome()"><strong>Take me back</strong></a>.
     </p>
     <ul>
-      <li *ngFor="let blog of blogs">
+      <li *ngFor="let blog of blogEntries">
         {{ blog }}
       </li>
     </ul>
@@ -19,14 +19,14 @@ import { DataService } from '../data.service';
 })
 export class AboutComponent implements OnInit {
 
-  blogs: any;
+  blogEntries: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private _data: DataService) {
     this.route.params.subscribe(res => console.log(res.id))
   }
 
   ngOnInit() {
-    this._data.blog.subscribe(res => this.blogs = res);
+    this._data.blogEntry.subscribe(res => this.blogEntries = res);
   }
 
   sendMeHome() {

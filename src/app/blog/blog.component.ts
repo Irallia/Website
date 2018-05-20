@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
 import { DataService } from '../data.service';
+import { BlogEntry } from '../BlogEntry';
+
+
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss'],
   animations: [
-    trigger('blogs', [
+    trigger('blogEntries', [
       transition('* => *', [
         query(':enter', style({ opacity: 0}), {optional: true}),
         query(':enter', stagger('300ms', [
@@ -30,28 +33,22 @@ import { DataService } from '../data.service';
 })
 export class BlogComponent implements OnInit {
 
+  selectedBlogEntry: BlogEntry;
+
+  onSelect(blogEntry: BlogEntry): void {
+    this.selectedBlogEntry = blogEntry;
+  }
+
   itemCount: number = 4;
-  btnText: string = 'Blogeintrag hinzufügen';
-  blogText: string = 'My first life goal';
-  blogs = [];
+  // btnText: string = 'Blogeintrag hinzufügen';
+  // blogText: string = 'My first life goal';
+  blogEntries = [];
 
   constructor(private _data: DataService) { }
 
   ngOnInit() {
-    this._data.blog.subscribe(res => this.blogs = res);
-    this.itemCount = this.blogs.length;
-    this._data.changeBlog(this.blogs);
-  }
-
-  addItem() {
-    this.blogs.push(this.blogText);
-    this.blogText = '';
-    this.itemCount = this.blogs.length;
-    this._data.changeBlog(this.blogs);
-  }
-
-  removeItem(i) {
-    this.blogs.splice(i, 1);
-    this._data.changeBlog(this.blogs);
+    this._data.blogEntry.subscribe(res => this.blogEntries = res);
+    this.itemCount = this.blogEntries.length;
+    this._data.changeBlog(this.blogEntries);
   }
 }
